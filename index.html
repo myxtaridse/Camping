@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+    <link rel="stylesheet" href="style.css">
+    <title>Responsive camping website - Bedimcode</title>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="nav-logo">
+                    <img src="logo.svg" alt="logo">
+                </a>
+                <div class="nav__menu show-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Pricing</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Events</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-button">
+                        <a href="#" class="nav-button-link">Login</a>
+                        <a href="#" class="nav-button-ghost">Get Started</a>
+                    </div>
+
+                    <!--====Close button(Закрытие кнопка)=====-->
+                    <div class="nav-close" id="nav-close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                </div>
+
+                <!--==Toogle button(Переключение кнопка)==-->
+                <div class="nav-toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!--====MAIN=====-->
+    <main class="main">
+    <!--====HOME=====-->
+    <section class="home">
+        <div class="home-container container">
+            <div class="home-content">
+                <div class="home-data">
+                    <h3 class="home-subtitle">
+                        A LIFETIME EXPERIENCE
+                    </h3>
+                    <h1 class="home-title">
+                        Camping Events <br>
+                        To Remember
+                    </h1>
+                    <p class="home-description">
+                        Camp anywhere anytime without hassle and enjoy.
+                    </p>
+                    <a href="#" class="home-button">
+                        Explore Locations
+                    </a>
+                </div>
+                <img src="bird-1.svg" alt="image" class="home-bird-1">
+                <img src="bird-2.svg" alt="image" class="home-bird-2">
+            </div>
+            <div class="home-images">
+                <img src="img-4.svg" alt="image" class="home-img-4">
+                <img src="img-3.svg" alt="image" class="home-img-3">
+                <img src="img-2.svg" alt="image" class="home-img-2">
+                <img src="img-1.svg" alt="image" class="home-img-1">
+            </div>
+        </div>
+    </section>
+    </main>
+    <!--==== GSAP ===-->
+    <script src="gsap.min.js"></script>
+    <!--===== MAIN JS ====-->
+    <script src="main.js"></script>
+</body>
+</html>

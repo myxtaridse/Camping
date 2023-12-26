@@ -1,0 +1,396 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@400;500;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 56px; /*(1rem = 16px) Высота шапки
+
+  /*========== Colors(разграничитель цветов) ==========*/
+  /*Color mode HSL(hue, saturation, lightness)(тон, насыщенность, светлота)*/
+--text-color: hsl(210, 24%, 15%);
+--body-color: hsl(210, 55%, 85%);
+--title-color: hsl(210, 52%, 20%);
+--first-color: hsl(195, 100%, 30%);
+--gradient-color: linear-gradient(90deg, /*угол 90градусов*/
+                  hsl(210, 55%, 20%),
+                  hsl(192, 62%, 25%));
+
+/*=========  Font and typography(Шрифт и типографика - художественное оформление текста с помощью шрифтов, символов и знаков)  ===========*/
+--body-font: "Poppins", sans-serif; /*общий шрифт*/
+--second-font: "Lora", serif; /*второстепенный шрифт*/
+--biggest-font-size: 36px; /*большой размер шрифта*/
+--normal-font-size: 15.008px; /*обычный размер шрифта*/
+--small-font-size: 13.008px; /*маленький размер шрифта*/
+
+/*=======   Font weight( Ширина шрифта )   =======*/
+--font-regular: 400;/*обучный*/
+--font-medium: 500;/*средняя жирность*/
+--font-semi-bold: 600;/*полужирный*/
+
+/*============   z-index( для стабилизации порядка элементов, которые перекрываются )    =============*/
+--z-tooltip: 10;/*Всплывающая подсказка, используется для отображения текстовой информации о чем-либо при наведении курсора мыши на элемент*/
+--z-fixed: 100;/*элемент позиционирует относительно окна браузера*/
+}
+
+/*============   Responsive typography(Адаптивная типографика - правильное размещение текста)   ==============*/
+@media screen /*задается нужное разрешение экрана устройства*/ and (min-width/*устанавливает минимальную ширину элемента*/: 1024px) { /*@media(медиазапрос) - набор правил (запросов), которые позволяют адаптировать внешний вид веб-страниц под технические параметры устройства пользователя: ширину и высоту экрана, плотность пикселей, количество поддерживаемых цветов и тд*/
+  :root { /*псевдокласс нужен для обращения к самому главному родительскому элементу документа (корневой элемент)*/
+    --biggest-font-size: 64px;/*большой размер*/
+    --normal-font-size: 16px;/*средний размер*/
+    --small-font-size: 14px;/*маленький размер*/
+  }
+}
+
+/*============  BASE( база, основа )  ============*/
+*{ /*относится к каждому отдельному элементу страницы*/
+  box-sizing: border-box;/*определяет как вычисляется общая ширина и высота элемента; говорит браузеру учитывать любые границы и внутренние отступы в значениях, которые вы указываете в ширине и высоте элемента*/
+  padding: 0; /*внутренний отступ-позволяет оттолкнуть контент от границ родительского элемента*/
+  margin: 0; /*задает размер внешнего отступа вокруг элемента. Иногда внешние отступы называют полями*/
+}
+
+body /*для всего контента*/ { /*присваиваем выше значения*/
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+ul {
+  list-style: none; /*для изображения и типа маркера*/
+}
+
+a {
+  text-decoration: none; /*для ссылок без подчеркивания*/
+}
+
+img {
+  display: block; /*блочное отображение, по ширине контейнера*/
+  max-width: 100%; /*максимальная ширина - 100%*/
+  height: auto; /*по умолчанию*/
+}
+
+/*============   REUSABLE CSS CLASSES(повторяющиеся классы)   =============*/
+.container {
+  z-index: 100;
+  max-width: 1120px;
+  margin-inline: 24px; /*определяет как логические встроенные начальные, так и конечные поля элемента, которые сопоставляются с физическими полями в зависимости от режима записи элемента, направления и ориентации текста*/
+}
+
+.main /*основной контент*/ {
+  overflow: hidden; /*For animation*/ /*позволяет определить, что делать с содержимым блочного элемента, в данном случаем hidden - содержимое, выходящее за пределы "родительского" блока, обрезается по его границам без прокрутки*/
+}
+
+/*=============  HEADER & NAV(ГОЛОВА САЙТА И НАВИГАЦИЯ)  =============*/
+.header {
+  position: fixed; /*задает способ позиционирования элементов в документе, в данном случае позиционируется относительно окна браузера, fixed задает элемент на фиксированном месте на странице, независимо от прокрутки страницы*/
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-color: var(--body-color);
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  position: relative; /*относительное позицирование сдвигает элемент относительно его обычного положения*/
+  height: var(--header-height);
+  display: flex; /*когда задаем какому-то элементу значение flex для свойства display, мы превращаем этот элемент в флекс-контейнер. Внутри него начинает действовать флекс-контекст, его довчерние элементы начинают подчиняться свойствам флексбокса. Снаружи флекс-контейнер выглядит как блочный эелемент - занимает всю ширину родителя, следующие за ним элементы в разметке переносятся на новую строку.*/
+  justify-content: space-between; /*свойство определяет, как браузер распределяет пространство вокруг флекс-элементов вдоль главной оси контейнера, space-between - флексы равномерно распределяются по всей строке. Первый и последний флекс прижимаются к соответствующим краям контейнера*/
+  align-items: center; /*свойство для выравнивания элементов внутри контейнера по поперечной оси, center - совместит центры родителя и каждого из элементов, элементы выстраиваются по центру поперечной оси*/
+
+}
+
+.nav-logo {
+  width: 36px;
+
+}
+
+.nav-close,
+.nav-toggle {
+  display: inline-flex; /*свойство сделает элемент контейнером flexbox, и контейнер будет встроенным. Они могут регулировать свой размер. Элементы внутри контейнера также являются встроенными. П.с. эелементы выходят по всей строке*/
+  font-size: 20px;
+  color: var(--title-color);
+  cursor: pointer; /*наведение на объект, ссылка, меняется курсор с мышки на руку*/
+
+}
+
+/*Navigation for mobile devices*/
+@media screen and (max-width: 1023px) {
+  .nav__menu {
+    position:fixed;
+    top: -100%;
+    left: 0;
+    border-color: var(--body-color);
+    width: 100%;
+    box-shadow: 0 /*тень не имеет четкие края*/ 1px 16px hsla(210, 55%, 24%, .1); /*тень*/
+    padding-block: 50px 30px; /*определяет начальное и конечное заполнение логического блока элемента, которое сопоставляется свойствам физического заполнения в зависимости от режима записи элемента, направленности и ориентации текста*/
+    display:flexbox;
+    flex-direction:column; /*свойство расставляет флекс-элементы в ряд или в колонку, column - основная ось идет вертикально сверху вниз, поперечная ось идет горизнтально слева направо*/
+    row-gap: 20px; /*задает размер промежутка между строками элемента*/
+    transition: top .4s; /*когда нужно плавно изменить свойства между двумя состояниями*/
+
+  }
+}
+
+.nav-list,
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  text-align: center; /*управляет выравниванием контента (к примеру текста) по горизонтали внутри родительского элемента*/
+  row-gap: 32px;
+  background-color: var(--body-color);
+  
+}
+
+.nav-link {
+  color: var(--title-color);
+  transition: color .3s;
+}
+
+.nav-link:hover {
+  color: var(--first-color);
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  z-index: 100;
+}
+
+.nav-button-link,
+.nav-button-ghost {
+  display: inline-block; /*строчно-блочное отображение, элемент ведет себя снаружи как строчный, а внутри как блочный*/
+  color: var(--title-color);
+}
+
+.nav-button-ghost {
+  background-color: hsla(0, 0%, 100%, .3);
+  padding: 16px 40px;
+  border: 2px solid var(--title-color);
+  border-radius: 12px;
+}
+
+.nav-close {
+  position: absolute; /*элемент удаляется из обычного потока документов, и для него не создается места в макете страницы*/
+  top: 16px;
+  right: 24px;
+}
+
+/*Show menu*/
+.show-menu {
+  top: 0;
+}
+/*Change background header(Изменить фоновый заголовок)*/
+.bg-header{
+  box-shadow: 0 1px 16px hsla(210, 55%, 24%, .12);
+}
+/*============   HOME   ============*/
+.home {
+  position: relative;
+}
+
+.home-container {
+  padding-top: 128px;
+  height: 100vh; /*соответствует полной высоте вьюпорта (видимой пользователю области веб-страницы) - 100%*/
+
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+}
+
+.home-data {
+  display: grid; /*Элемент ведет себя как эелемент уровня блока и размещает свое содержимое в соответствии с сеточной моделью*/
+  row-gap: 8px;
+}
+
+.home-subtitle {
+  font-size: var(--small-font-size);
+  color: var(--first-color);
+  letter-spacing: 3px; /*Задает поведение горизонтального интервала между символами текста*/
+}
+
+.home-title {
+  font-size: var(--biggest-font-size);
+  font-family: var(--second-font);
+  color: var(--title-color);
+}
+
+.home-description {
+  margin-bottom: 40px;
+}
+
+.home-button {
+  display: inline-block;
+  background: var(--gradient-color);
+  color: #fff;
+  width: max-content;
+  padding: 16px 32px;
+  border-radius: 12px;
+  box-shadow: 0 24px 32px hsla(210, 54%, 24%, .3);
+  z-index: 0;
+}
+
+.home-bird-1,
+.home-bird-2 {
+  position: absolute;
+  width: 60px;
+}
+
+.home-bird-1 {
+  bottom: -96px;
+  rotate: -30deg; /*поворот элемента вокруг точки, не деформируя*/
+}
+
+.home-bird-2 {
+  top: 72px;
+  right: 0;
+  rotate: -15deg;
+}
+
+.home-images {
+  z-index: 1;
+}
+
+.home-images img{
+  position: absolute;
+  max-width: initial; /*свойство по умолчанию*/
+  width: 600px;
+  left: -112px;
+  bottom: 0;
+}
+/*=============  BREAKPOINTS( КОНТРОЛЬНЫЕ ТОЧКИ - триггеры настраиваемой ширины, которые определяют поведение адаптивного макета в зависимости от размеров устройства или области просмотра )  =============*/
+
+/*For small devices ( Для небольших устройств ) */
+@media screen and (max-width: 305px){
+  .container{
+    margin-inline: 16px;
+  }
+  .home-title{
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .home-button{
+    margin-top: 20px;
+  }
+}
+
+/*For taller devices ( Для более высоких устройств ) */
+@media screen and (min-width: 376px) and (min-height: 800px){
+  .home-container{
+    padding-top: 160px;
+  }
+  .home-images img{
+    width: 700px;
+    left: -192px;
+  }
+}
+
+/*For medium devices ( Для средних устройств ) */
+@media screen and (min-width: 480px){
+  .home-content{
+    max-width: 305px;
+  }
+  .home-bird-2{
+    right: -48px;
+  }
+  .home-images img{
+    width: initial;
+    left: 0;
+  }
+}
+
+/*For large devices ( Для больших устройств ) */
+@media screen and (min-width: 1023px){
+  .nav{
+    height: 88px; /*функция с вычислением*/
+    column-gap: 64px; /*задает размер промежутка между столбцами элемента*/
+  }
+  .nav-toggle,
+  .nav-close{
+    display: none;
+  }
+  .nav__menu{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-list{
+    flex-direction: row; /*задает способ размещения элементов flex в контейнере flex, определяяглавную ось и направление (нормальное или обратное), row - главная ось контейнера определяется так, чтобы совпадать с направлением текста*/
+    column-gap: 80px;
+  }
+  .nav-button{
+    flex-direction: row;
+    column-gap: 48px;
+  }
+  .nav-logo{
+    width: 48px;
+  }
+  .home-content{
+    max-width: 550px;
+  }
+  .home-data{
+    row-gap: 16px;
+  }
+  .home-subtitle{
+    font-size: var(--normal-font-size);
+  }
+  .home-description{
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (min-width: 1120px){
+  .container{
+    margin-inline: auto;
+  }
+}
+
+@media screen and (min-width: 1300px){
+  .home-container{
+    height: 950px;
+    padding-top: 160px;
+  }
+  .home-bird-1,
+  .home-bird-2{
+    width: 80px;
+  }
+  .home-bird-1{
+    bottom: -112px;
+    left: -112px;
+  }
+  .home-bird-2{
+    top: 0;
+    right: -96px;
+  }
+  .home-images img{
+    bottom: -48px;
+  }
+
+  ::-webkit-scrollbar{
+    width: 0.6rem;
+    border-radius: 8px;
+    background-color: hsl(220, 24%, 15%);
+  } /*влияет на стиль полосы прокрутки элемента*/
+  ::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: hsl(220, 24%, 25%);
+  } /*перетаскиваемый дескриптор прокрутки*/
+}
+
+/*For 2K resolutions (2048 x 1152) ( Для разрешения 2K )*/
+@media screen and (min-width: 2048px){
+  .container{
+    min-width: 1300px;
+  }
+  .home-container{
+    height: 1300px;
+    padding-top: 240px;
+  }
+}
